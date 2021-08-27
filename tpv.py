@@ -293,7 +293,7 @@ def log_pravotv(d):
 
 def took_money(n, m):
     tk.messagebox.showinfo("Вы забрали деньги", "Ваш выигрыш - "+str(MONEY[5]*n+MONEY[m-1]))
-    log.write("Игрок забирает деньги"+'\n'+ "Выигрыш - "+str(MONEY[5]*n+MONEY[m-1]))
+    log.write("Игрок забирает деньги"+'\n'+ "Выигрыш - "+str(MONEY[5]*n+MONEY[m-1])+'\n')
 
 
 def round_start():
@@ -375,6 +375,7 @@ def yep():
             TIME_LEFT = 240
             for i in range(3):
                 zamienic[i]["image"] = ahat
+        timer["text"] = time.strftime('%M:%S', time.gmtime(TIME_LEFT))
         infa = "У вас в банке "+str(LAPS_PASSED*MONEY[5])+'. \n В текущем круге вы заработали '+str(MONEY[ROUND_NUMBER-1])+'\n Времени осталось: '+str(time.strftime('%M:%S', time.gmtime(TIME_LEFT)))+'\n Замен осталось: '+str(FLIPS)+'\n'
         if (ROUND_NUMBER==1):
             hhru=5
