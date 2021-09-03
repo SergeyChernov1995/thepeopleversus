@@ -297,10 +297,9 @@ def took_money(n, m):
 
 
 def round_start():
-    global TIME_LEFT, tick, SKIP_LEFT, FLIPS, otvet_na_zamenu, no_more_left_z, no_more_left_q, morna, s, LAPS_PASSED, ROUND_NUMBER
+    global TIME_LEFT, tick, SKIP_LEFT, FLIPS, otvet_na_zamenu, no_more_left_z, no_more_left_q, morna, s, LAPS_PASSED, ROUND_NUMBER, baza_zamen_round, bazaq_round
     root.after_cancel(root.startgame)
     #verno["state"], neverno["state"], \
-    pas["state"], zamena["state"] = skipflip(SKIP_LEFT), skipflip(FLIPS)
     if (no_more_left_z) or (no_more_left_q):
         #verno.place_forget()
         #neverno.place_forget()
@@ -317,6 +316,7 @@ def round_start():
             TIME_LEFT -=1
             timer["text"] = time.strftime('%M:%S', time.gmtime(TIME_LEFT))
             test["state"] = "normal"
+            pas["state"], zamena["state"] = skipflip(SKIP_LEFT), skipflip(FLIPS)
         else:
             log.write("Круг " + str(LAPS_PASSED + 1) + '. Раунд ' + str(ROUND_NUMBER) + ' (' + str(MONEY[ROUND_NUMBER]) + ')' + '\n')
             load_questions()
@@ -328,13 +328,15 @@ def round_start():
             tick = True
         if TIME_LEFT==0:
             pytania[QUESTIONS_PASSED]["image"] = cuatro
-            q_after(otvet_na_zamenu)
-            tk.messagebox.showerror("Время", "Время вышло!")
             log.write("Время истекло"+'\n')
             if (otvet_na_zamenu):
                 log.write("Правильный ответ: " + baza_zamen_round[s]["A"][0] + '\n')
+                parodytas_klausimas["text"] = baza_zamen_round[s]["A"][0]
             else:
                 log.write("Правильный ответ: " + bazaq_round[s]["A"][0] + '\n')
+                parodytas_klausimas["text"] = bazaq_round[s]["A"][0]
+            tk.messagebox.showerror("Время", "Время вышло!")
+            #q_after(otvet_na_zamenu)
             morna = False
             test.place_forget()
             #verno.place_forget()
@@ -358,6 +360,7 @@ def yep():
     otvet_na_zamenu = False
     if (QUESTIONS_PASSED) == ROUND_NUMBER:
         root.after_cancel(root.startgame)
+        pas["state"], zamena["state"] = "disabled", "disabled"
         #parodytas_klausimas["text"] = ""
         tk.messagebox.showinfo("", "Верно!")
         bazaq_numbaz = []
