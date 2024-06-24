@@ -2,3 +2,19 @@
 american_cartoons.txt
 История России второй половины XX века
 history_russia_1951_2000.txt
+Мясные блюда
+meat_food.txt
+Египет древний и современный
+egypt.txt
+Философия Сократа
+socrat.txt
+Шахматы
+chess.txt
+История Древней Индии
+ancient_india.txt
+Преферанс
+preferans.txt
+Национальная хоккейная лига
+nhl.txt
+Животные семейства кошачьих
+felines.txt
