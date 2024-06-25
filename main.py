@@ -212,7 +212,7 @@ def blah():
             tk.messagebox.showinfo('Гонг', 'Вы не отыграли ничего')
     if (bong_stopped is False):
         log.write('Выигрыш в гонг-игре: ' + str(bong_howmuchsaved) + '\n')
-    if (alt_var_enabled is False):
+    if (alt_var_enabled is False) or (a_o_n_activated is False):
         tk.messagebox.showinfo("Конец игры", "Выигрыш: " + str(MONEY[5] * LAPS_PASSED + bong_howmuchsaved))
         log.write("Выигрыш: " + str(MONEY[5] * LAPS_PASSED + bong_howmuchsaved) + '\n')
     elif (a_o_n_activated is True):
