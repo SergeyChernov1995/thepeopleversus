@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # ----------------------------------------------------------------------------
 # The People Versus
-# Copyright © 2021-2024 Sergey Chernov aka Gamer
+# Copyright © 2021 Sergey Chernov aka Gamer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -158,8 +158,8 @@ def setgong(variant_, aim):
 
 def bong_game():
     global stagegong, bong_summa_index, active, bong_buttons, bong_summa, bong_stop, bong_stopped, ROUND_NUMBER, happy_variant, LAPS_PASSED, BANK
-    if a_o_n_activated is True:
-        BANK = 0
+    # if a_o_n_activated is True:
+    #     BANK = 0
     pas.place_forget()
     zamena.place_forget()
     flip_topic_choose.place_forget()
@@ -199,7 +199,10 @@ def blah():
         bong_summa["text"] = str(all_m)
         bong_stop["state"] = "disabled"
         if (bong_stopped)==False:
-            bong_howmuchsaved = MONEY[ROUND_NUMBER-1]
+            if (a_o_n_activated) is False:
+                bong_howmuchsaved = MONEY[ROUND_NUMBER-1]
+            else:
+                bong_howmuchsaved = MONEY[ROUND_NUMBER-1]+BANK
             tk.messagebox.showinfo('Вам повезло', 'Вы отыграли все ' + str(bong_howmuchsaved))
     else:
         bong_summa["text"] = "ГОНГ"
@@ -212,9 +215,9 @@ def blah():
     if (alt_var_enabled is False):
         tk.messagebox.showinfo("Конец игры", "Выигрыш: " + str(MONEY[5] * LAPS_PASSED + bong_howmuchsaved))
         log.write("Выигрыш: " + str(MONEY[5] * LAPS_PASSED + bong_howmuchsaved) + '\n')
-    else:
-        tk.messagebox.showinfo("Конец игры", "Выигрыш: " + str(BANK + bong_howmuchsaved))
-        log.write("Выигрыш: " + str(BANK + bong_howmuchsaved) + '\n')
+    elif (a_o_n_activated is True):
+        tk.messagebox.showinfo("Конец игры", "Выигрыш: " + str(bong_howmuchsaved))
+        log.write("Выигрыш: " + str(bong_howmuchsaved) + '\n')
 
 
 def increase():
@@ -239,7 +242,10 @@ def start_bong_game(uyt):
     for a in range(len(bong_buttons)):
         bong_buttons[a]["state"] = "disabled"
     root.bongtimer = root.after(randint(1600, 3200), increase)
-    setgong(uyt, MONEY[ROUND_NUMBER-1])
+    if a_o_n_activated is False:
+        setgong(uyt, MONEY[ROUND_NUMBER-1])
+    else:
+        setgong(uyt, MONEY[ROUND_NUMBER-1]+BANK)
 
 def skipflip(a):
     if (a>0):
